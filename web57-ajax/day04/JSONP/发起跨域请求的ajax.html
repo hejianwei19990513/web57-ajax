@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../jquery-3.5.1.js"></script>
+</head>
+
+<body>
+    <button>发起跨域的get请求</button>
+    <script>
+        $("button").on("click",function () {
+            $.ajax({
+                type: "get",
+                // 会报错
+                url: "http://www.escook.cn:3006/api/jsonp",
+                // url:"http://www.liulongbin.top:3006/api/getbooks",
+                dataType:"jsonp",
+                data: {
+                    name: "jjy",
+                    type: "girlGod",
+                },
+                success: function (res) {
+                    console.log(res);
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

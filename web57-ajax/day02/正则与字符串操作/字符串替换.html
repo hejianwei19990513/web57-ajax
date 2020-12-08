@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- replace()函数用于在字符串中用一些字符替换另一些字符 -->
+    <script>
+        var str = "<div>我是{{name}}</div>"
+        var reg = /{{(\w+)}}/
+        var result = reg.exec(str);
+        str = str.replace(result[0],result[1])
+        console.log(str);
+    </script>
+</body>
+
+</html>

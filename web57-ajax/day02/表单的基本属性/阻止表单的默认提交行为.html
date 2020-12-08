@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+</head>
+<body>
+    <form action="../表单跳转测试页面.html" id="test">
+        <input type="text" name="email or phonenumber">
+        <input type="password" name="password">
+        <!-- buttoon兼容性不太好，在有些浏览器可以提交，有些则不会 -->
+        <button type="submit">提交</button>
+        <!-- <input type="button" value="提交">这个不会提交，但是这个不会跳转页面，通常用这个结合ajax来实现提交数据功能 -->
+    </form>
+    <script>
+        // 第一种方式
+        // $("#test").on("submit",function(e){
+        //     e.preventDefault()
+        // })
+
+        第二种方式
+        $("#test").submit(function(e){
+            e.preventDefault()
+        })
+    </script>
+</body>
+</html>

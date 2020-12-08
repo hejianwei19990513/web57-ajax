@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板引擎五步曲</title>
+    <script src="../jquery-3.5.1.js"></script>
+
+    <!-- 第一步，引入模板文件 -->
+    <script src="./template-web.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+
+    <!-- 第三步，模板的html结构，必须定义到script当中 -->
+    <script type="text/html" id="tpl-user">
+        <h1>人物简介</h1>
+        <div>名字：<span>{{name}}</span></div>
+        <div>年龄：<span>{{age}}</span></div>
+        <div>类型：<span>{{type}}</span></div>
+        <!-- 这里可以写简单的三元表达式 -->
+        <div>婚否：<span>{{marry?"已婚":"未婚"}}</span></div>
+        <ul>作品：
+            <!-- 循环works属性值，这里的each不是jquery里面的each -->
+            {{each works}}
+            <li>{{$value}}</li>
+            {{/each}}
+        </ul>
+    </script>
+
+    <script>
+        $(function(){
+            // 第二步定义数据
+            var data = {
+                name:"鞠婧祎",
+                age:26,
+                type:"明星",
+                marry:false,
+                works:["《云汐传》","《如意芳菲》"]
+            }
+
+            // 第四步，调用template函数,第一个参数【不加#号】，第二个参数必须是【对象】(数组也不行)
+            var htmlStr = template("tpl-user",data)
+            // 第五步，渲染ui结构
+            // $("#container").html(htmlStr)
+            document.querySelector("#container").innerHTML= htmlStr
+        })
+    </script>
+</body>
+</html>

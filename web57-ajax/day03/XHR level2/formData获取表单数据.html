@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+</head>
+
+<body>
+    <form id="form1">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="submit">
+    </form>
+    <script>
+        // var form = document.querySelector("#form1")
+        // form.addEventListener("submit",function (e) {
+        //     e.preventDefault()
+        //     var fd = new FormData(form)
+        //     fd.append("age",26)
+        //     var xhr = new XMLHttpRequest()
+        //     xhr.open("post", "http://www.liulongbin.top:3006/api/formdata")
+        //     xhr.send(fd)
+        //     xhr.onreadystatechange = function () {
+        //         if (xhr.readyState == 4 && xhr.status == 200) {
+        //             console.log(JSON.parse(xhr.responseText));
+        //         }
+        //     }
+        // })
+
+        $("form").on("submit",function(e){
+            e.preventDefault()
+            var fd = new FormData($(this))
+            fd.append("age",26)
+            var xhr = new XMLHttpRequest()
+            xhr.open("post", "http://www.liulongbin.top:3006/api/formdata")
+            xhr.send(fd)
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(JSON.parse(xhr.responseText));
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

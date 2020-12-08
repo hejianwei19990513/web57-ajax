@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    使用xhr发起GET请求
+    步骤:
+    创建xhr对象
+    调用xhr.open()函数
+    调用xhr.send()函数
+    监听xhr.onreadystatechange事件
+        <script>
+            var xhr = new XMLHttpRequest()
+            xhr.open("get","http://www.liulongbin.top:3006/api/getbooks")
+            xhr.send()
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    console.log(xhr.responseText);
+                }
+            }
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+</head>
+<body>
+    <form action="../表单跳转测试页面.html" id="test">
+        <input type="text" name="name">
+        <input type="password" name="password">
+        <button type="submit">提交</button>
+    </form>
+    <script>
+        // 注意，如果需要表单的serialize方法，必须要给每个想要获取的表单给个【name】值
+        $("#test").submit(function(e){
+            e.preventDefault()
+            // 当表单有一项含有name属性的input里面没有填写内容时，也会提交，这时就得把    name=&password=123变成{name="",password=123}
+            var data = $(this).serialize()
+            console.log(data);
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>直接发起get或post请求</button>
+    <script src="./axios.js"></script>
+    <script>
+        var btn = document.querySelector("button")
+        btn.onclick = function(){
+            axios({
+                type:"get",
+                url:"http://www.liulongbin.top:3006/api/get",
+                // data:{name:"jjy",type:"girlGod"},//post需要提交的数据用data
+                params:{name:"jjy",type:"girlGod"},//get需要提交的数据用params
+            }).then(function(res){
+                console.log(res.data);
+            })
+        }
+    </script>
+</body>
+</html>

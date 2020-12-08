@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = "<div>我叫{{jerry}},今年{{ 18 }}岁啦,我的女神是{{jjy}},她是个{{star}}哦</div>"
+        var reg = /{{\s*(\w+)\s*}}/
+        var result = reg.exec(str)
+        // for (var i = 0; i < 4; i++) {
+        //     str = str.replace(result[0], result[1])
+        //     result = reg.exec(str);
+        // }
+        // console.log(str);
+        while(result != null){
+            str = str.replace(result[0], result[1])
+            result = reg.exec(str);
+        }
+        console.log(str);
+    </script>
+</body>
+
+</html>

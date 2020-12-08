@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // fd是一个二进制对象，所以在post请求的时候不需要编码
+        var fd = new FormData()
+        fd.append("name","jjy")
+        fd.append("type","girlGod")
+
+        var xhr = new XMLHttpRequest()
+
+        xhr.open("post","http://www.liulongbin.top:3006/api/formdata")
+
+        // 这里不需要那个setRequestHeader
+        
+        xhr.send(fd)
+
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                console.log(JSON.parse(xhr.responseText));
+            }
+        }
+    </script>
+</body>
+</html>

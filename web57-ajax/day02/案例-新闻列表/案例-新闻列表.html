@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/news.css" />
+  <script src="./lib/jquery.js"></script>
+  <script src="./lib/template-web.js"></script>
+</head>
+
+<body>
+
+  <div id="news-list">
+    
+  </div>
+
+  <script type="text/html" id="content">
+    {{each data}}
+    <div class="news-item">
+      <img class="thumb" src="http://www.liulongbin.top:3006{{$value.img}}" alt="" />
+      <div class="right-box">
+        <h1 class="title">{{$value.title}}</h1>
+        <div class="tags">
+          {{each $value.tags}}
+          <span>{{$value}}</span>
+          {{/each}}
+        </div>
+        <div class="footer">
+          <div>
+            <span>{{$value.source}}</span>&nbsp;&nbsp;
+            <span>{{$value.time | time}}</span>
+          </div>
+          <span>评论数：{{$value.cmtcount}}</span>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+    </script>
+
+  <script>
+    template.defaults.imports.time = function(Time){
+      var date = new Date(Time)
+      var y = date.getFullYear();
+      var m = date.getMonth()+1;
+      var d = date.getDate().toString().padStart(2,0);
+      var h = date.getHours().toString().padStart(2,0);
+      var mi = date.getMinutes().toString().padStart(2,0);
+      var s = date.getSeconds().toString().padStart(2,0);
+      return y + "-" + m + "-" + d + " " + h + ":" + mi + ":" +s
+    }
+    function getData() {
+      $.ajax({
+        type:"get",
+        url:"http://www.liulongbin.top:3006/api/news",
+        success:function(res){
+          if(res.status !== 200) return alert("获取新闻失败")
+          for(var i = 0 ; i < res.data.length ; i++) {
+            res.data[i].tags = res.data[i].tags.split(",")
+          }
+          console.log(res);
+          var htmlStr = template("content",res)
+          $("#news-list").html(htmlStr)
+        }
+      })
+    }
+    getData()
+  </script>
+</body>
+
+</html>

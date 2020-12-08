@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    1.什么是跨域
+    同源指的是两个URL的协议、域名、端口一致，反之，则是跨域。
+    出现跨域的根本原因:浏览器的同源策略不允许非同源的URL之间进行资源的交互。
+    网页: http://www.test.com/index.html
+    接口: http://www.api.com/userlist
+
+
+    2.如何实现跨域数据请求
+    现如今，实现跨域数据请求，最主要的两种解决方案，分别是JSONP和CORS。
+    JSONP:出现的早，兼容性好(兼容低版本IE)。是前端程序员为了解决跨域问题，被迫想出来的一种临时解决方案。缺点是只支持GET请求，不支持 POST请求。
+    CORS:出现的较晚，它是W3C标准，属于跨域Ajax请求的根本解决方案。支持GET和POST请求。缺点是不兼容某些低版本的浏览器。
+
+</body>
+
+</html>

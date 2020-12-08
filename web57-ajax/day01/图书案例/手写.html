@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap.css">
+    <script src="./jquery.js"></script>
+</head>
+
+<body style="padding: 15px;">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加新图书</h3>
+        </div>
+        <div class="panel-body form-inline">
+            <div class="input-group">
+                <div class="input-group-addon">书名</div>
+                <input type="text" class="form-control" id="iptbookname" placeholder="请输入书名">
+            </div>
+            <div class="input-group">
+            <div class="input-group-addon">作者</div>
+            <input type="text" class="form-control" id="iptauthor" placeholder="请输入作者">
+        </div>
+        <div class="input-group">
+            <div class="input-group-addon">出版社</div>
+            <input type="text" class="form-control" id="iptpublisher" placeholder="请输入出版社">
+        </div>
+        <button class="btn btn-primary" id="btnAdd">添加</button>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>书名</th>
+                <th>作者</th>
+                <th>出版社</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="tb">
+
+        </tbody>
+    </table>
+    <script>
+        $(function () {
+            function getData() {
+                $.ajax({
+                    type: "get",
+                    url: "http://www.liulongbin.top:3006/api/getbooks",
+                    // beforeSend:function(){
+                    //     return false
+                    // }发送之前需要判断条件的函数，数据不合法一定要返回false，不然也会发送
+                    success: function (res) {
+                        if (res.status !== 200) return alert("获取图书失败")
+                        var rows = []
+                        $.each(res.data, function (i, items) {
+                            rows.push(`<tr><td>${items.id}</td><td>${items.bookname}</td><td>${items.author}</td><td>${items.publisher}</td><td><a href='javascript:;' data-id=${items.id} class="del">删除</a></td></tr>`)
+                        })
+                        $("#tb").empty().append(rows.join(''))
+                    }
+                })
+            }
+            getData();
+            $("#btnAdd").on("click",function(){
+                var bookname = $("#iptbookname").val().trim()
+                var author = $("#iptauthor").val().trim()
+                var publisher = $("#iptpublisher").val().trim()
+                if(bookname.length <= 0 || author.length <= 0 || publisher.length <= 0) return alert("请输入图书信息")
+                $.post('http://www.liulongbin.top:3006/api/addbook', { bookname: bookname, author: author, publisher: publisher }, function (res) {
+                        if (res.status !== 201) return alert('添加图书失败！')
+                        getData()
+                        $('#iptbookname').val('')
+                        $('#iptauthor').val('')
+                        $('#iptpublisher').val('')
+                    })
+            })
+            $("#tb").on("click",".del",function(){
+                var index = $(this).attr("data-id");
+                console.log(index);
+                $.get("http://www.liulongbin.top:3006/api/delbook",{id:index},function(res){
+                    if(res.status !== 200) return alert("删除图书失败")
+                    getData()
+                })
+            })
+        })  
+    </script>
+</body>
+
+</html>

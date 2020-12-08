@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+    <script src="../template-web.js"></script>
+</head>
+
+<body>
+    <!-- 过滤器
+    {(value / filterName } }
+    过滤器语法类似管道操作符，它的上一个输出作为下一个输入。
+    定义过滤器的基本语法如下:
+    template.defaults.imports.filterName = function (value){/*return处理的结果*/} -->
+    <div class="box"></div>
+    <script type="text/html" id="one">
+        <div>注册时间：{{date | filterName}}</div>
+    </script>
+
+    <script>
+        template.defaults.imports.filterName = function(date){
+            var y = date.getFullYear()
+            var m = date.getMonth() + 1
+            var d = date.getDate()
+            return y + "-" + m + "-" + d
+        }
+        var data = {
+            date:new Date
+        }
+        var str = template("one",data)
+        $(".box").html(str)
+    </script>
+</body>
+
+</html>

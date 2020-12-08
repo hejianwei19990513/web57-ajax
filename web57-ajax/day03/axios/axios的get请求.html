@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.js"></script>
+</head>
+
+<body>
+    <button>axios发起get请求</button>
+    <!-- 什么是axios
+    Axios是专注于网络数据请求的库。
+    传智播有1主百什的MI HttoReauest对象，axios简单易用。
+    相比于jQuery，axios更加轻量化，只专注于网络数据请求。 -->
+    <script>
+        var btn = document.querySelector("button")
+        btn.onclick = function(){
+            var url = "http://www.liulongbin.top:3006/api/get"
+            var data = {name:"jjy",type:"girlGod"}
+            axios.get(url,{params:data}).then(function(res){
+                // res.data才是所需要的数据
+                console.log(res.data);
+            })
+        }
+    </script>
+</body>
+
+</html>

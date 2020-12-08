@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+    <script src="../template-web.js"></script>
+</head>
+
+<body>
+    <!-- 标准语法–条件输出
+    如果要实现条件输出，则可以在{{}中使用if ... else if.../i的方式，进行按需输出。
+    {{if value}}按需输出的内容{{/if}}
+    {{if v1}}按需输出的内容{{else if v2}}按需输出的内容{{/if} } -->
+    <div id="container"></div>
+    <script type="text/html" id="tpl-user">
+        <h1>人物简介</h1>
+        <div>名字：<span>{{name}}</span></div>
+        <div>年龄：<span>{{age}}</span></div>
+        <div>类型：<span>{{type}}</span></div>
+        <div>婚否：<span>{{marry?"已婚":"未婚"}}</span></div>
+        <div>成年否：
+            <!-- 条件输出 -->
+            {{if age>18}}
+                今年成年啦
+            {{else}}
+                今年未成年哟
+            {{/if}}
+        </div>
+        <ul>作品：
+            {{each works}}
+            <li>{{$value}}</li>
+            {{/each}}
+        </ul>
+    </script>
+
+    <script>
+        $(function(){
+            var data = {
+                name:"鞠婧祎",
+                age:26,
+                type:"明星",
+                marry:false,
+                works:["《云汐传》","《如意芳菲》"]
+            }
+            var htmlStr = template("tpl-user",data)
+            $("#container").html(htmlStr)
+        })
+    </script>
+</body>
+</html>

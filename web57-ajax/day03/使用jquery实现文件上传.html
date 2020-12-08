@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="../bootstrap.css">
+</head>
+<body>
+    <input type="file">
+
+    <img src="./loading.gif" alt="" style="display: none;" id="one">
+
+    <img src="" alt="" id="two">
+    <script>
+        $(document).ajaxStart(function(){
+            $("#one").css("display","block")
+        })
+        $(document).ajaxSuccess(function(){
+            $("#one").css("display","none")
+        })
+        $("input").on("change",function(){
+            var doc = $(this)[0].files
+            var fd = new FormData()
+            fd.append("avatar",doc[0])
+            $.ajax({
+                type:"post",
+                url:"http://www.liulongbin.top:3006/api/upload/avatar",
+                data:fd,
+                contentType:false,
+                processData:false,
+                success:function(res){
+                    if(res.status != 200) return alert("发送不成功")
+                    $("#two").attr("src","http://www.liulongbin.top:3006"+res.url)
+                }
+            })
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+    <script src="../template-web.js"></script>
+</head>
+<body>
+    <!-- 3.标准语法–原文输出
+    {@ value }}
+    如果要输出的value值中，包含了HTML标签结构，则需要使用原文输出语法。才能保证HTML标签被正常渲染。 -->
+    <div class="box"></div>
+    
+    <script type="text/html" id="one">
+            {{@ content}}
+    </script>
+    <script>
+        var data = {
+            content:"<div>我是小鞠的粉丝</div>",
+        }
+        var str = template("one",data)
+        $(".box").html(str)
+    </script>
+</body>
+</html>

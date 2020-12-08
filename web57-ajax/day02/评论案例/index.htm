@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap.css">
+    <link rel="stylesheet" href="./index.css">
+    <script src="./jquery.js"></script>
+    <script src="./index.js"></script>
+</head>
+
+<body style="padding: 15px;">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Panel heading without title</div>
+        <form action="" id="form1" style="padding: 15px;">
+            <div>评论人：</div>
+            <input type="text" name="username" class="form-control" placeholder="请输入评论人" id="person">
+            <div>评论内容：</div>
+            <textarea name="content" id="content" class="form-control" placeholder="请输入评论内容(最多120字)"></textarea>
+            <button type="submit" id="btnAdd" class="btn btn-primary">发表评论</button>
+        </form>
+        <!-- <div class="panel-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">评论人：</label>
+                <input type="email" class="form-control" name="username" id="person" placeholder="请输入评论人">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">评论内容：</label>
+                <textarea class="form-control" rows="3" name="content" id="content"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary">发表评论</button>
+        </div> -->
+    </div>
+    <ul class="list-group" id="cmt-list">
+        <!-- <li class="list-group-item">
+            12123
+          <span class="badge" id="badge-1">评论时间：</span>
+          <span class="badge" id="badge-2">评论人：</span>
+        </li> -->
+      </ul>
+</body>
+
+</html>

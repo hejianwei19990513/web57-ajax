@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <button>发起带参数的post请求</button>
+    <script>
+        $(function(){
+            $("button").on("click",function(){
+                $.post("http://www.liulongbin.top:3006/api/addbook",{bookname:"红楼梦",author:"曹雪芹",publisher:"天津图书出版社"},function(res){
+                    console.log(res);
+                })
+            })
+        })
+    </script>
+</body>
+</html>

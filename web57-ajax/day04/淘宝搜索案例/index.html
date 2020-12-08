@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <!-- 导入页面的基本样式 -->
+  <link rel="stylesheet" href="./css/search.css" />
+  <!-- 导入 jQuery -->
+  <script src="./lib/jquery.js"></script>
+  <script src="./lib/template-web.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <img src="./images/taobao_logo.png" alt="" class="logo" />
+
+    <div class="box">
+      <!-- tab 栏 -->
+      <div class="tabs">
+        <div class="tab-active">宝贝</div>
+        <div>店铺</div>
+      </div>
+      <!-- 搜索区域（搜索框和搜索按钮） -->
+      <div class="search-box">
+        <input type="text" class="ipt" placeholder="请输入要搜索的内容" />
+        <button class="btnSearch">
+          搜索
+        </button>
+      </div>
+      <div class="suggest-list">
+
+      </div>
+    </div>
+  </div>
+  <script type="text/html" id="tpl-suggest-list">
+    {{each result}}
+    <div class="suggest-item">{{$value[0]}}</div>
+    {{/each}}
+  </script>
+  <script>
+    var time = null;
+    var huancun = {}
+    function fangdou(aa){
+      time = setTimeout(function(){
+        getData(aa)
+      },500)
+    }
+    $(".ipt").on("keyup", function () {
+      clearInterval(time)
+      var word = $(".ipt").val().trim();
+      if(word.length == 0) {
+        return $(".suggest-list").empty().hide()
+      }
+      if(huancun[word]) {
+        return xrData(huancun[word])
+      }
+      fangdou(word)
+    })
+    function getData(data) {
+      $.ajax({
+        url: "https://suggest.taobao.com/sug?q="+data,
+        dataType: "jsonp",
+        success: function (res) {
+          console.log(res);
+          xrData(res)
+        }
+      })
+    }
+    function xrData(res) {
+      if(res.result.length == 0) {
+        return $(".suggest-list").empty().hide()
+      }
+      var str = template("tpl-suggest-list",res)
+      $(".suggest-list").html(str).show()
+
+      var k = $(".ipt").val().trim();
+      huancun[k] = res
+    }
+  </script>
+</body>
+
+</html>

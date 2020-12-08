@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        data = {name:"何建伟",age:"18",girlGod:"鞠婧祎",star:"明星"}
+        var str = "<div>我叫{{name}},今年{{ age }}岁啦,我的女神是{{girlGod}},她是个{{star}}哦</div>"
+        var reg = /{{\s*(\w+)\s*}}/
+        var result = reg.exec(str)
+        // for (var i = 0; i < 4; i++) {
+        //     str = str.replace(result[0], result[1])
+        //     result = reg.exec(str);
+        // }
+        // console.log(str);
+        while(result != null){
+            // 只需要把这里的result[1]改成data[result[1]]（例如data[name]的值）
+            str = str.replace(result[0], data[result[1]])
+            result = reg.exec(str);
+        }
+        console.log(str);
+    </script>
+</body>
+
+</html>

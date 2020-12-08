@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 使用xhr发起POST请求
+    步骤:
+    创建xhr 对象
+    调用xhr.open()函数
+    设置Content-Type属性(固定写法)   xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+    调用xhr.send()函数，同时指定要发送的数据
+    监听xhr.onreadystatechange 事件 -->
+
+    <script>
+        var xhr = new XMLHttpRequest()
+
+        xhr.open("post","http://www.liulongbin.top:3006/api/addbook")
+
+        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+
+        xhr.send("bookname=西游记1&author=吴承恩1&publisher=天津出版社1")
+
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+</head>
+<body>
+    <form action="../表单跳转测试页面.html" id="test">
+        <input type="text" name="email or phonenumber">
+        <input type="password" name="password">
+        <button type="submit">提交</button>
+    </form>
+    <script>
+        // 第一种方式
+        // $("#test").on("submit",function(){
+        //     alert('小鞠女神')
+        // })
+
+        // 第二种方式
+        $("#test").submit(function(){
+            alert('小鞠女神')
+        })
+    </script>
+</body>
+</html>

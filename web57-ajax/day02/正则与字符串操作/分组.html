@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 正则表达式中()包起来的内容表示一个分组，可以通过分组来提取自己想要的内容 -->
+    <script>
+        var str = "<div>我是{{name}}</div>"
+        var reg = /{{(\w+)}}/
+        console.log(reg.exec(str));
+    </script>
+</body>
+</html>

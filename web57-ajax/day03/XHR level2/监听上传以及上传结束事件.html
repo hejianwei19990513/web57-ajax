@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../bootstrap.css">
+</head>
+
+<body>
+    <!-- 4.4上传文件
+    新版XMLHttpRequest对象，不仅可以发送文本信息，还可以上传文件。实现步骤:
+    定义U结构
+    验证是否选择了文件
+    向FormData中追加文件
+    使用xhr '发起上传文件
+    请求监听onreadystatechange事件 -->
+    <input type="file" multiple>
+
+    <div class="progress" style="width: 400px; display: none;">
+        <div class="progress-bar progress-bar-striped active" style="width: 0%">
+        </div>
+      </div>
+
+    <img src="" alt="">
+    <script>
+        var file = document.querySelector("input")
+        var div = document.querySelector(".progress-bar")
+        var div1 = document.querySelector(".progress")
+        file.addEventListener("change", function () {
+            div1.style.display = "block"
+            var doc = this.files
+            var fd = new FormData()
+            fd.append("avatar", doc[0])
+            var xhr = new XMLHttpRequest()
+            
+            // 监听上传事件
+            xhr.upload.onprogress = function(e){
+                var percent = Math.ceil(e.loaded/e.total*100) + "%"
+                div.style.width = percent
+                div.innerHTML = percent
+            }
+
+            // 监听上传结束事件
+            xhr.upload.onload =function(){
+                div.className = "progress-bar progress-bar-success"
+            }
+            xhr.open("post", "http://www.liulongbin.top:3006/api/upload/avatar")
+            xhr.send(fd)
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var data = JSON.parse(xhr.responseText)
+                    if (data.status == 200) {
+                        document.querySelector("img").src = "http://www.liulongbin.top:3006" + data.url
+                    } else {
+                        alert("文件上传失败")
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
